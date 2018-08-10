@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         val viewPagerAdapter = ViewPagerAdapter(this, supportFragmentManager)
         viewPager.adapter = viewPagerAdapter
