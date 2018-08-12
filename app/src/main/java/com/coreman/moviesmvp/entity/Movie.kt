@@ -1,6 +1,7 @@
 package com.coreman.moviesmvp.entity
 
 import com.google.gson.annotations.SerializedName
+import java.util.ArrayList
 
 data class Movie(
         @SerializedName("vote_count") val voteCount: Int,
@@ -15,5 +16,6 @@ data class Movie(
         @SerializedName("backdrop_path") val backdropPath: String,
         @SerializedName("adult") val adult: Boolean,
         @SerializedName("overview") val overview: String,
-        @SerializedName("release_date") val releaseDate: String
+        @SerializedName("release_date") val releaseDate: String,
+        @SerializedName("genre_ids") val genresIds: List<Int>
 )

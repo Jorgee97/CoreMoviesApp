@@ -7,4 +7,5 @@
     <string name="popular_movies_title">Popular</string>
     <string name="favorite_movies_title">Favorites</string>
     <string name="main_movies_title">CoreMovies</string>
+    <string name="details_button">Details</string>
 </resources>
