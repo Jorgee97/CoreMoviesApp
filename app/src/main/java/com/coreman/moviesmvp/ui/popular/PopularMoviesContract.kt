@@ -9,6 +9,7 @@ interface PopularMoviesContract {
 
     interface View : BaseView {
         fun showPopularMovies(movies: List<Movie>, genres: List<Genre>)
+        fun showProgressBar(show: Boolean)
     }
 
     interface Presenter : BasePresenter<View>{

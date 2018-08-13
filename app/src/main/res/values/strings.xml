@@ -8,4 +8,6 @@
     <string name="favorite_movies_title">Favorites</string>
     <string name="main_movies_title">CoreMovies</string>
     <string name="details_button">Details</string>
+    <string name="release_date">Release date</string>
+    <string name="adult_movie">Adult</string>
 </resources>

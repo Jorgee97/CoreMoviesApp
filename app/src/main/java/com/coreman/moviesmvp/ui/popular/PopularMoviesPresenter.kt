@@ -29,12 +29,16 @@ class PopularMoviesPresenter: PopularMoviesContract.Presenter {
     }
 
     override fun getPopularMovies() {
+        view.showProgressBar(true)
         getGenres()
         val call: Observable<MovieResultList> = moviesApi.getPopularMovies()
         call.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe (
-                        { movies -> view.showPopularMovies(movies.results, genresList) },
+                        { movies ->
+                            view.showPopularMovies(movies.results, genresList)
+                            view.showProgressBar(false)
+                        },
                         { e -> Log.e("ErrorGetPopularMovies()", e.stackTrace.toString())}
                 )
     }

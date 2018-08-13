@@ -2,6 +2,8 @@ package com.coreman.moviesmvp.ui.popular
 
 
 import android.content.Context
+import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -16,6 +18,8 @@ import com.coreman.moviesmvp.App
 import com.coreman.moviesmvp.R
 import com.coreman.moviesmvp.entity.Genre
 import com.coreman.moviesmvp.entity.Movie
+import com.coreman.moviesmvp.ui.detail.DetailsMoviesActivity
+import com.coreman.moviesmvp.util.MOVIE_ID
 import kotlinx.android.synthetic.main.fragment_popular_movies.*
 import javax.inject.Inject
 
@@ -52,7 +56,19 @@ class PopularMoviesFragment : Fragment(), PopularMoviesContract.View {
     }
 
     override fun showPopularMovies(movies: List<Movie>, genres: List<Genre>) {
-        adapter = PopularMoviesAdapter(movies, genres)
+        adapter = PopularMoviesAdapter(movies, genres) { movie, view ->
+            val intent = Intent(context, DetailsMoviesActivity::class.java)
+            intent.putExtra(MOVIE_ID, movie.id.toString())
+            startActivity(intent)
+        }
         movies_recycler.adapter = adapter
+    }
+
+    override fun showProgressBar(show: Boolean) {
+        if (show) {
+            progressBar.visibility = View.VISIBLE
+        } else {
+            progressBar.visibility = View.INVISIBLE
+        }
     }
 }

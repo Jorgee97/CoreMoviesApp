@@ -9,5 +9,12 @@
         android:id="@+id/movies_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:visibility="invisible"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        />
 
 </FrameLayout>
