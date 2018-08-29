@@ -8,7 +8,7 @@ Actually the app fetch data from themoviedb.org, if you want to run this app on 
 
 - Implementation of Dagger2 for dependency injection.
 - Implementation of RxJava with Retrofit for fetching data from the API.
-- Implementation of MVP for future facility for testing.
+- Implementation of MVP for future implemenation of testing.
 
 # Future Features
 
