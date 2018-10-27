@@ -18,7 +18,9 @@ import com.coreman.moviesmvp.App
 import com.coreman.moviesmvp.R
 import com.coreman.moviesmvp.entity.Genre
 import com.coreman.moviesmvp.entity.Movie
+import com.coreman.moviesmvp.entity.MovieCache
 import com.coreman.moviesmvp.ui.detail.DetailsMoviesActivity
+import com.coreman.moviesmvp.util.ACTUAL_MOVIE
 import com.coreman.moviesmvp.util.MOVIE_ID
 import kotlinx.android.synthetic.main.fragment_popular_movies.*
 import javax.inject.Inject
@@ -56,9 +58,20 @@ class PopularMoviesFragment : Fragment(), PopularMoviesContract.View {
     }
 
     override fun showPopularMovies(movies: List<Movie>, genres: List<Genre>) {
-        adapter = PopularMoviesAdapter(movies, genres) { movie, view ->
+        adapter = PopularMoviesAdapter(movies, genres) { movie, _ ->
             val intent = Intent(context, DetailsMoviesActivity::class.java)
+            var movieGenre = ""
+            movie.genresIds.forEach { item ->
+                genres.forEach { genre ->
+                    if (item == genre.id)
+                        movieGenre += genre.name + " /"
+                }
+            }
+
+            val actualMovie = MovieCache(movie.id, movie.voteAverage, movie.title, movie.posterPath,
+                    movie.originalTitle, movieGenre)
             intent.putExtra(MOVIE_ID, movie.id.toString())
+            intent.putExtra(ACTUAL_MOVIE, actualMovie)
             startActivity(intent)
         }
         movies_recycler.adapter = adapter

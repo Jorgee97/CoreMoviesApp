@@ -1,7 +1,7 @@
 package com.coreman.moviesmvp.entity
 import com.google.gson.annotations.SerializedName
 
-data class MovieDetails(
+data class MovieDetails (
     @SerializedName("adult") val adult: Boolean,
     @SerializedName("backdrop_path") val backdropPath: String,
     @SerializedName("genres") val genres: List<Genre>,

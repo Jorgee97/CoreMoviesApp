@@ -2,6 +2,7 @@ package com.coreman.moviesmvp.ui.detail
 
 import com.coreman.moviesmvp.BasePresenter
 import com.coreman.moviesmvp.BaseView
+import com.coreman.moviesmvp.entity.MovieCache
 import com.coreman.moviesmvp.entity.MovieDetails
 
 interface DetailsMoviesContract {
@@ -12,5 +13,6 @@ interface DetailsMoviesContract {
 
     interface Presenter: BasePresenter<View> {
         fun getMovieDetails(id: Int)
+        fun saveMovie(movie: MovieCache)
     }
 }

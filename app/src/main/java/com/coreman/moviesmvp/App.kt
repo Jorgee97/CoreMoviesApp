@@ -3,6 +3,7 @@ package com.coreman.moviesmvp
 import android.app.Application
 import com.coreman.moviesmvp.di.*
 import com.coreman.moviesmvp.di.modules.AppModule
+import com.coreman.moviesmvp.di.modules.DataModule
 import com.coreman.moviesmvp.di.modules.NetworkModule
 import com.coreman.moviesmvp.di.modules.PresenterModule
 
@@ -21,6 +22,7 @@ class App : Application() {
 
         mainComponent = DaggerMainComponent.builder()
                 .appModule(AppModule(applicationContext))
+                .dataModule(DataModule())
                 .networkModule(NetworkModule())
                 .presenterModule(PresenterModule())
                 .build()

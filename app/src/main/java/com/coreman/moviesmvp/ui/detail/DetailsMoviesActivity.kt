@@ -5,22 +5,28 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.coreman.moviesmvp.App
 import com.coreman.moviesmvp.BasePresenter
 import com.coreman.moviesmvp.R
+import com.coreman.moviesmvp.entity.MovieCache
 import com.coreman.moviesmvp.entity.MovieDetails
+import com.coreman.moviesmvp.util.ACTUAL_MOVIE
 import com.coreman.moviesmvp.util.IMAGE_URL
 import com.coreman.moviesmvp.util.IMAGE_URL_BACKDROP
 import com.coreman.moviesmvp.util.MOVIE_ID
 import kotlinx.android.synthetic.main.activity_details_movies.*
 import javax.inject.Inject
 
-class DetailsMoviesActivity : AppCompatActivity(), DetailsMoviesContract.View {
+class DetailsMoviesActivity : AppCompatActivity(), DetailsMoviesContract.View, View.OnClickListener {
 
     @Inject
     lateinit var presenter: DetailsMoviesPresenter
+
+    private lateinit var movieId: String
+    private lateinit var actualMovie : MovieCache
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +39,17 @@ class DetailsMoviesActivity : AppCompatActivity(), DetailsMoviesContract.View {
 
         (application as App).mainComponent.inject(this)
 
-        val movieId = intent.getStringExtra(MOVIE_ID)
+        movieId  = intent.getStringExtra(MOVIE_ID)
+        actualMovie = intent.getParcelableExtra(ACTUAL_MOVIE)
 
+        setupViews()
+    }
+
+    private fun setupViews() {
         presenter.attachView(this)
         presenter.getMovieDetails(movieId.toInt())
+
+        floatingActionButton.setOnClickListener(this)
     }
 
     override fun showLoading(show: Boolean) {
@@ -73,6 +86,12 @@ class DetailsMoviesActivity : AppCompatActivity(), DetailsMoviesContract.View {
                 .load(IMAGE_URL + moviesDetails.posterPath)
                 .into(post_image)
 
+    }
+
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.floatingActionButton -> presenter.saveMovie(actualMovie)
+        }
     }
 
 }
